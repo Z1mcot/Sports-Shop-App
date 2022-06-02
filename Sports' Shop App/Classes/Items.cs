@@ -82,15 +82,15 @@ namespace Sports__Shop_App
 
         public override string ShowWidth()
         {
-            throw new Exception("У объекта класса Shoes не может быть ширины");
+            return "";
         }
         public override string ShowLength()
         {
-            throw new Exception("У объекта класса Shoes не может быть длины");
+            return "";
         }
         public override string ShowHeight()
         {
-            throw new Exception("У объекта класса Shoes не может быть высоты");
+            return "";
         }
     }
 
@@ -143,7 +143,7 @@ namespace Sports__Shop_App
         }
         public override string ShowHeight()
         {
-            throw new Exception("У объекта класса YogaMats не может быть высоты");
+            return "";
         }
     }
 
