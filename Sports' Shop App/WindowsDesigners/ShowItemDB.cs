@@ -15,11 +15,12 @@ namespace Sports__Shop_App.WindowsDesigners
     {
         ItemsDatabase ItemsDB;
         int row_num = 0;
-        int[] sortingOrders = new int[]{ 1, 1, 1 };
+        int selectedColumn;
+        List<IComparer> comparersList = new List<IComparer> { new ItemIdComparer(), new ItemNameComparer(), new ItemPriceComparer() };
 
         public ShowItemDB()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         public ShowItemDB(MainMenu BackToMenu, ItemsDatabase Items_DB)
@@ -72,30 +73,19 @@ namespace Sports__Shop_App.WindowsDesigners
 
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            IComparer comparerType = null;
-            switch (e.Column)
-            {
-                case 0:
-                    
-                    comparerType = new ItemIdComparer();
-                    sortingOrders[0] *= -1;
-                    break;
-                case 1:
-                    comparerType = new ItemNameComparer();
-                    sortingOrders[1] *= -1;
-                    break;
-                case 2:
-                    comparerType = new ItemPriceComparer();
-                    sortingOrders[2] *= -1;
-                    break;
-                default:
-                    break;
-            }
-            if (comparerType != null)
+            IComparer comparerType = comparersList[e.Column];
+
+            if (e.Column != selectedColumn)
             {
                 ItemsDB.ItemsDB.Sort(comparerType);
-                FillTheTable();
+                selectedColumn = e.Column;
             }
+            else // в этом случае список уже должен быть отсортирован, поэтому остаётся только обратить порядок
+            {
+                ItemsDB.ItemsDB.Reverse();
+            }
+            
+            FillTheTable();   
         }
     }
 }

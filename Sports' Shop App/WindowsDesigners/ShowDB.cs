@@ -17,6 +17,15 @@ namespace Sports__Shop_App
         ItemsDatabase ItemsDB;
         uint customers_count;
         int row_num = 0;
+        int selectedColumn;
+        List<IComparer<Customers>> comparersList = new List<IComparer<Customers>> { new CustomersIDComparer(), 
+            new CustomersSurnameComparer(), 
+            new CustomersNameComparer(),
+            new CustomersBoughtItemsQuantityComparer(),
+            new CustomersSpendingsComparer(), 
+            new CustomersItemIDComparer()
+        };
+
         public ShowDB()
         {
             InitializeComponent();
@@ -155,11 +164,19 @@ namespace Sports__Shop_App
         // Сортировка при нажатии по столбцу
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (e.Column == 4)
+            IComparer<Customers> comparerType = comparersList[e.Column];
+
+            if (e.Column != selectedColumn)
             {
-                CustomersDB.CustomersDB.Sort(new CustomersCompare());
-                FillTheTable();
+                CustomersDB.CustomersDB.Sort(comparerType);
+                selectedColumn = e.Column;
             }
+            else // в этом случае список уже должен быть отсортирован, поэтому остаётся только обратить порядок
+            {
+                CustomersDB.CustomersDB.Reverse();
+            }
+
+            FillTheTable();
         }
     }
 }

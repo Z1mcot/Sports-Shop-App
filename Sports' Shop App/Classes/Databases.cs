@@ -163,13 +163,49 @@ namespace Sports__Shop_App
         }
     }
 
-    public class CustomersCompare : IComparer<Customers>
+    public class CustomersIDComparer : IComparer<Customers>
+    {
+        public int Compare(Customers customerA, Customers customerB)
+        {
+            return customerA.OrderId.CompareTo(customerB.OrderId);
+        }
+    }
+    public class CustomersSurnameComparer : IComparer<Customers>
+    {
+        public int Compare(Customers customerA, Customers customerB)
+        {
+            return customerA.Surname.CompareTo(customerB.Surname);
+        }
+    }
+    public class CustomersNameComparer : IComparer<Customers>
+    {
+        public int Compare(Customers customerA, Customers customerB)
+        {
+            return customerA.Name.CompareTo(customerB.Name);
+        }
+    }
+    public class CustomersBoughtItemsQuantityComparer : IComparer<Customers>
+    {
+        public int Compare(Customers customerA, Customers customerB)
+        {
+            return customerA.ItemsQuantity.CompareTo(customerB.ItemsQuantity);
+        }
+    }
+    public class CustomersSpendingsComparer : IComparer<Customers>
     {
         public int Compare(Customers customerA, Customers customerB)
         {
             return customerA.CostOfItems - customerB.CostOfItems;
         }
     }
+    public class CustomersItemIDComparer : IComparer<Customers>
+    {
+        public int Compare(Customers customerA, Customers customerB)
+        {
+            return customerA.ItemId.CompareTo(customerB.ItemId);
+        }
+    }
+
 
     /*public class YogaMatsDatabase : IDatabases
     {
